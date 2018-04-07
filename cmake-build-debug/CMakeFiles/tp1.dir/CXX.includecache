@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/pballan/Documents/exactas/algo3/tp1/main.cpp
+fstream
+-
+string
+-
+sstream
+-
+iostream
+-
+list
+-
+vector
+-
+typeinfo
+-
+
