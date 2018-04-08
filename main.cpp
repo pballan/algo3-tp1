@@ -29,13 +29,23 @@ int main()
     readTxt(dataset, line, input, amountElements, maxWeight);
 
 
+    cout << endl;
+    cout << endl;
+    
     maxCombo bruteForceResult = bruteForce(dataset, maxWeight, amountElements);
     printResult(bruteForceResult);
+
+    cout << endl;
+    cout << endl;
 
     maxCombo backTrackingResult = backTrackingF(dataset, maxWeight, amountElements);
     printResult(bruteForceResult);
 
-    maxCombo pDinamicResult = pDinamic(dataset);
+    cout << endl;
+    cout << endl;
+
+    maxCombo pDinamicResult = pDinamic(dataset, maxWeight, amountElements);
+    printResult(pDinamicResult);
 
     return 0;
 }
