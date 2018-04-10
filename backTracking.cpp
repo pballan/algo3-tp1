@@ -4,7 +4,7 @@ void resolveBackTrackingF(entry *entries, vector<entry> actuals, int currentWeig
 {
     if (index < amountElements)
     {
-        if (actualProfit > max.totalProfit && currentWeight < maxWeight)
+        if (actualProfit > max.totalProfit && currentWeight <= maxWeight)
         {
             max.conjunto = actuals;
             max.totalWeight = currentWeight;
@@ -15,7 +15,7 @@ void resolveBackTrackingF(entry *entries, vector<entry> actuals, int currentWeig
         if (currentWeight + entries[index].weight <= maxWeight)
         {
             actuals.push_back(entries[index]);
-            if (actualProfit + entries[index].profit > max.totalProfit && currentWeight + entries[index].weight < maxWeight)
+            if (actualProfit + entries[index].profit > max.totalProfit && currentWeight + entries[index].weight <= maxWeight)
             {
                 max.conjunto = actuals;
                 max.totalWeight = currentWeight + entries[index].weight;

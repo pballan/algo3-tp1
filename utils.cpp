@@ -13,17 +13,6 @@ void printResult(maxCombo &result){
             }
         }
     cout << "]" << endl;
-   /* for(list<vector<entry> >::iterator it=result.begin(); it != result.end(); ++it){
-        cout << endl;
-        cout << "[";
-        for(int i = 0; i < (*it).size(); i++){
-            cout << "{profit: " << (*it)[i].profit << ", weight: " << (*it)[i].weight << "}";
-            if (i < (*it).size() - 1){
-                cout << ", ";
-            }
-        }
-        cout << "]" << endl;
-    }*/
 }
 
 

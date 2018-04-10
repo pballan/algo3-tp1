@@ -5,6 +5,7 @@
 #include <list>
 #include <vector>
 #include <typeinfo>
+#include <chrono>
 using namespace std;
 
 struct entry
@@ -19,3 +20,10 @@ struct maxCombo
     int totalWeight;
     int totalProfit;
 };
+
+struct maxProfit 
+{
+    int totalWeight;
+    int totalProfit;
+};
+

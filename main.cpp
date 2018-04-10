@@ -31,21 +31,46 @@ int main()
 
     cout << endl;
     cout << endl;
-    
+
+
+    auto start = chrono::system_clock::now();    
     maxCombo bruteForceResult = bruteForce(dataset, maxWeight, amountElements);
-    printResult(bruteForceResult);
+    auto end = chrono::system_clock::now();
+    chrono::duration<double> elapsed_seconds = end-start;
+
+    time_t end_time = chrono::system_clock::to_time_t(end);
+    cout << "Fuerza Bruta: " << elapsed_seconds.count() << "s\n";
+    
+    
+    //printResult(bruteForceResult);
 
     cout << endl;
     cout << endl;
 
-    maxCombo backTrackingResult = backTrackingF(dataset, maxWeight, amountElements);
-    printResult(bruteForceResult);
+
+    start = chrono::system_clock::now();    
+    maxCombo backTrackingResult = backTrackingF(dataset, maxWeight, amountElements);    
+    end = chrono::system_clock::now();
+    elapsed_seconds = end-start;
+
+    end_time = chrono::system_clock::to_time_t(end);
+    cout << "BT: " << elapsed_seconds.count() << "s\n";
+    
+    //printResult(backTrackingResult);
 
     cout << endl;
     cout << endl;
 
-    maxCombo pDinamicResult = pDinamic(dataset, maxWeight, amountElements);
-    printResult(pDinamicResult);
+    start = chrono::system_clock::now();    
+    maxProfit pDinamicResult = pDinamic(dataset, maxWeight, amountElements);   
+    end = chrono::system_clock::now();
+    elapsed_seconds = end-start;
+
+    end_time = chrono::system_clock::to_time_t(end);
+    cout << "PD: " << elapsed_seconds.count() << "s\n";
+    
+
+
 
     return 0;
 }

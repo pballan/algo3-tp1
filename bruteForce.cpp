@@ -4,7 +4,7 @@ void resolveBruteForce(entry *entries, vector<entry> actuals, int currentWeight,
 {
     if (index < amountElements)
     { 
-        if (actualProfit > max.totalProfit && currentWeight < maxWeight){
+        if (actualProfit > max.totalProfit && currentWeight <= maxWeight){
             max.conjunto = actuals;
             max.totalWeight = currentWeight;
             max.totalProfit = actualProfit;
@@ -12,7 +12,7 @@ void resolveBruteForce(entry *entries, vector<entry> actuals, int currentWeight,
         resolveBruteForce(entries, actuals, currentWeight, amountElements, index + 1, result, actualProfit, maxWeight, max);      
         
         actuals.push_back(entries[index]);
-        if (actualProfit + entries[index].profit > max.totalProfit && currentWeight + entries[index].weight < maxWeight){
+        if (actualProfit + entries[index].profit > max.totalProfit && currentWeight + entries[index].weight <= maxWeight){
             max.conjunto = actuals;
             max.totalWeight = currentWeight + entries[index].weight;
             max.totalProfit = actualProfit + entries[index].profit;
