@@ -1,54 +1,14 @@
 using namespace std;
 
-bool isEmpty(maxProfit emptyToCheck)
-{
-    if (emptyToCheck.totalProfit == 0 && emptyToCheck.totalWeight == 0)
-    {
-        //cout << "holis" << endl;
-        return true;
-    }
-    return false;
-}
+
 /*
-void resolvePDinamic(maxCombo actuals, int from, int to, maxCombo *cache, maxCombo &maxOne, int maxWeight, entry *entries){
-
-    if (!isEmpty(cache[from])){
-        for (int k = 0; k < cache[from].conjunto.size(); k++){
-            actuals.conjunto.push_back(cache[from].conjunto[k]);
-        }
-        actuals.totalProfit += cache[from].totalProfit;
-        actuals.totalWeight += cache[from].totalProfit; 
-    }else{       
-        resolvePDinamic(actuals, from + 1, to, cache, maxOne, maxWeight, entries);    
-        if (actuals.totalProfit > maxOne.totalProfit && actuals.totalWeight <= maxWeight){
-            maxOne = actuals;
-        }         
-        actuals.conjunto.push_back(entries[from]);
-        actuals.totalProfit += entries[from].profit;
-        actuals.totalWeight += entries[from].weight;
-        resolvePDinamic(actuals, from + 1, to, cache, maxOne, maxWeight, entries);
-        if (actuals.totalProfit > maxOne.totalProfit && actuals.totalWeight <= maxWeight){
-            maxOne = actuals;
-        }
-    } 
-}*/
-
-int theMax(int A, int B)
-{
-    if (A > B)
-    {
-        return A;
-    }
-    return B;
-}
-
 int resolveDinamic(entry *entries, int from, int to, int *cache, maxProfit &maxOne, int maxWeight, int currentWeight, int currentProfit)
 {
     if (from <= to)
     {
         if (cache[to] != 0)
         {
-            if (cache[to] + currentProfit > maxOne.totalProfit && currentWeight <= maxWeight)
+            if (cache[to] + currentProfit >= maxOne.totalProfit && currentWeight <= maxWeight)
             {
                 maxOne.totalProfit = cache[to] + currentProfit;
                 maxOne.totalWeight = currentWeight;
@@ -58,7 +18,7 @@ int resolveDinamic(entry *entries, int from, int to, int *cache, maxProfit &maxO
         else
         {
             cache[to] = theMax(resolveDinamic(entries, from, to - 1, cache, maxOne, maxWeight, currentWeight + entries[to].weight, currentProfit + entries[to].profit) , resolveDinamic(entries, from, to - 1, cache, maxOne, maxWeight, currentWeight, currentProfit));
-            if (cache[to] + currentProfit > maxOne.totalProfit && currentWeight <= maxWeight)
+            if (cache[to] + currentProfit >= maxOne.totalProfit && currentWeight <= maxWeight)
             {
                 maxOne.totalProfit = cache[to] + currentProfit;
                 maxOne.totalWeight = currentWeight;
@@ -69,21 +29,51 @@ int resolveDinamic(entry *entries, int from, int to, int *cache, maxProfit &maxO
     }else{
         return 0;
     }
-}
+}*/
 
-void initializeCache(int *cache, int amountElements, maxProfit &max)
+int reallyResolveDynamic(int amountElements, int maxWeight, vector<vector<int>> &cache, entry *entries, int fullProfit)
 {
-
-    max.totalWeight = 0;
-    max.totalProfit = 0;
-
-    for (int i = 0; i < amountElements; i++)
+    int totalMax = 0;
+    for (int i = 1; i <= amountElements; i++)
     {
-        cache[i] = 0;
+        for (int j = 0; j < maxWeight + 1; j++)
+        {
+            int maxBetween2;
+            int res1;
+            int res2;
+            
+            if (j - entries[i - 1].weight >= 0)
+            {
+                res1 = cache[i - 1][j - entries[i - 1].weight] + entries[i - 1].profit;
+                res2 = cache[i - 1][j];
+                maxBetween2 = max(res1, res2);
+            }
+            else
+            {
+                maxBetween2 = cache[i - 1][j];
+            }
+
+            if (maxBetween2 >= totalMax)
+            {
+                totalMax = maxBetween2;
+            }
+            cache[i][j] = maxBetween2;
+        }
     }
+
+    for(int r = 0; r < amountElements; r++){
+        for(int c = 0; c < maxWeight + 1; c++){
+            //cout << cache[r][c] << " ";
+            //cout << "R: " << r << " C:" << c;
+        }
+        //cout << endl;
+    }
+
+    return totalMax;
 }
 
-maxProfit pDinamic(entry entries[], int maxWeight, int amountElements)
+
+int pDinamic(entry entries[], int maxWeight, int amountElements)
 {
     int currentWeight = 0;
     int from = 0;
@@ -91,10 +81,28 @@ maxProfit pDinamic(entry entries[], int maxWeight, int amountElements)
     maxCombo actuals;
     entry *entries_ptr = entries;
     maxProfit max;
-    int cache[amountElements];
+    vector<vector<int>> cache(amountElements + 1);
 
-    initializeCache(cache, amountElements, max);
-    resolveDinamic(entries_ptr, from, amountElements - 1, cache, max, maxWeight, currentWeight, 0);
+    max.totalWeight = 0;
+    max.totalProfit = 0;
 
-    return max;
+    int fullProfit = 0;
+
+    for (int i = 0; i < amountElements + 1; i++)
+    {
+        cache[i].resize(maxWeight + 1);
+        fullProfit += entries[i].profit;
+    }
+
+    for (int i = 0; i < amountElements + 1; i++)
+    {
+        for (int j = 0; j < maxWeight; j++)
+        {
+            cache[i][j] = 0;
+        }
+    }
+
+    int res = reallyResolveDynamic(amountElements, maxWeight, cache, entries_ptr, fullProfit);
+
+    return res;
 }

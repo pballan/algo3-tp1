@@ -6,6 +6,7 @@
 #include <vector>
 #include <typeinfo>
 #include <chrono>
+#include <algorithm>
 using namespace std;
 
 struct entry

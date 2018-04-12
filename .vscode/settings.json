@@ -26,6 +26,7 @@
         "ratio": "cpp",
         "algorithm": "cpp",
         "limits": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "__tuple": "cpp"
     }
 }

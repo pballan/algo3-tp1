@@ -36,12 +36,12 @@ void readTxt(entry *dataset, string line, ifstream &input, int amountElements, i
             {
                 if (actualNumber == 0)
                 {
-                    dataset[cant].profit = atoi(concat.c_str());
+                    dataset[cant].weight = atoi(concat.c_str());
                     actualNumber++;
                 }
                 else
                 {
-                    dataset[cant].weight = atoi(concat.c_str());
+                    dataset[cant].profit = atoi(concat.c_str());
                     actualNumber = 0;
                 }
                 concat.clear();

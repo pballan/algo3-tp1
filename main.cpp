@@ -40,7 +40,7 @@ int main()
 
     time_t end_time = chrono::system_clock::to_time_t(end);
     cout << "Fuerza Bruta: " << elapsed_seconds.count() << "s\n";
-    
+    cout << "Max: " << bruteForceResult.totalProfit << endl;
     
     //printResult(bruteForceResult);
 
@@ -55,16 +55,17 @@ int main()
 
     end_time = chrono::system_clock::to_time_t(end);
     cout << "BT: " << elapsed_seconds.count() << "s\n";
-    
+    cout << "Max: " << backTrackingResult.totalProfit << endl;
     //printResult(backTrackingResult);
 
     cout << endl;
     cout << endl;
 
     start = chrono::system_clock::now();    
-    maxProfit pDinamicResult = pDinamic(dataset, maxWeight, amountElements);   
+    int pDinamicResult = pDinamic(dataset, maxWeight, amountElements);   
     end = chrono::system_clock::now();
     elapsed_seconds = end-start;
+    cout << "Max: " << pDinamicResult << endl;
 
     end_time = chrono::system_clock::to_time_t(end);
     cout << "PD: " << elapsed_seconds.count() << "s\n";
