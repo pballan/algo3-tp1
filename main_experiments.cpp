@@ -31,7 +31,8 @@ int main()
     int amountElements;
     cin >> amountElements;
     cin >> maxWeight;
-    
+    //cout << "cant,bf,bt,pd,worked" << endl;
+
     entry dataset[amountElements];
 
     for(int i = 0; i < amountElements; i++){
@@ -39,8 +40,12 @@ int main()
         cin >> dataset[i].weight;
     }
 
-    auto start = chrono::system_clock::now();    
-    int bruteForceResult = bruteForce(dataset, maxWeight, amountElements);
+    auto start = chrono::system_clock::now(); 
+    int bruteForceResult = 0;  
+    for(int i = 0; i < 5; i++) {
+        bruteForceResult += bruteForce(dataset, maxWeight, amountElements);    
+    }
+    bruteForceResult = bruteForceResult/5;
     auto end = chrono::system_clock::now();
     chrono::duration<double> elapsed_seconds = end-start;
 
@@ -51,7 +56,11 @@ int main()
 
 
     start = chrono::system_clock::now();    
-    int backTrackingResult = backTrackingF(dataset, maxWeight, amountElements);    
+    int backTrackingResult = 0;
+    for(int i = 0; i < 5; i++){
+        backTrackingResult += backTrackingF(dataset, maxWeight, amountElements);
+    }
+    backTrackingResult = backTrackingResult/5; 
     end = chrono::system_clock::now();
     elapsed_seconds = end-start;
 
@@ -59,8 +68,12 @@ int main()
     cout << elapsed_seconds.count() << ",";
     //cout << "Max: " << backTrackingResult.totalProfit << endl;
 
-    start = chrono::system_clock::now();    
-    int pDinamicResult = pDinamic(dataset, maxWeight, amountElements);   
+    start = chrono::system_clock::now();  
+    int pDinamicResult;  
+    for(int i = 0; i < 5; i++){
+        pDinamicResult += pDinamic(dataset, maxWeight, amountElements);   
+    }
+    pDinamicResult = pDinamicResult/5;
     end = chrono::system_clock::now();
     elapsed_seconds = end-start;
 

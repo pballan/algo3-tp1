@@ -28,5 +28,6 @@
         "limits": "cpp",
         "ostream": "cpp",
         "__tuple": "cpp"
-    }
+    },
+    "python.linting.pylintEnabled": false
 }
